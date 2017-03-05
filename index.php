@@ -1,21 +1,36 @@
 <?php
 
-include 'pages/index.content.php';
-
-
-
-
+   header('Location: pages/home.php');
+//include 'pages/index.content.php';
 
 ?>
 
 <html>
  <head>
+   <!--
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <script type="text/javascript">
+
      google.charts.load('current', {'packages':['corechart']});
      google.charts.setOnLoadCallback(drawChart);
 
      function drawChart() {
+
+       var data = new google.visualization.DataTable(<?//=$json_data?>);
+
+       //alert(data);
+
+       var options = {
+         title: 'Company Performance',
+         curveType: 'function',
+         legend: { position: 'bottom' }
+       };
+
+       var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+       chart.draw(data, options);
+
+       /*
        var data = google.visualization.arrayToDataTable([
          ['Year', 'Sales', 'Expenses'],
          ['2004',  1000,      400],
@@ -33,10 +48,11 @@ include 'pages/index.content.php';
        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
        chart.draw(data, options);
+       */
      }
-   </script>
+   </script>-->
  </head>
  <body>
-   <div id="curve_chart" style="width: 900px; height: 500px"></div>
+   <!--<div id="curve_chart" style="width: 900px; height: 500px"></div>-->
  </body>
 </html>
