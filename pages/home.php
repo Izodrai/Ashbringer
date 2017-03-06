@@ -7,7 +7,7 @@ include '../models/symbols.php';
 
 
 $config = load_config();
-
+/*
 try {
   $db = db_connect($config->localhost_server);
 } catch(PDOException $ex) {
@@ -52,7 +52,7 @@ function getData($db) {
   $stmt = $db->query('SELECT id, values_1, values_2 FROM datas');
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+*/
 /*
 try {
   $activ_symbols = get_activ_symbols($db);
@@ -82,7 +82,7 @@ var_dump($symbols);
 
       function drawChart() {
 
-        var data = new google.visualization.DataTable(<?=$json_data?>);
+        var data = new google.visualization.DataTable(<?//=$json_data?>);
 
         var options = {
           title: 'Company Performance',
