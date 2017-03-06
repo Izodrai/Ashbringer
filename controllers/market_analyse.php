@@ -49,7 +49,6 @@ $symbol_to_display = $current_symbol->reference;
 
 list($data_sma,$data_ema,$data_macd) = load_last_data_for_symbol($db, $current_symbol);
 
-
 function load_last_data_for_symbol($db, $current_symbol){
   $data = get_stock_value_for_symbol($db, $current_symbol);
 
