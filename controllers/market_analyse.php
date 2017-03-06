@@ -23,13 +23,15 @@ try {
 
 $data_sma = array();
 $data_ema = array();
-$data_macd = array();
+$data_macd1 = array();
+$data_macd2 = array();
+$data_macd3 = array();
 $symbol_to_display = "";
 //$current_symbol = NULL;
 
 if (!isset($_POST["select_symbol"])) {
   $symbol_to_display = $activ_symbols[0]->reference;
-  list($data_sma,$data_ema,$data_macd) = load_last_data_for_symbol($db, $activ_symbols[0]);
+  list($data_sma, $data_ema, $data_macd1, $data_macd2, $data_macd3) = load_last_data_for_symbol($db, $activ_symbols[0]);
   return;
 }
 
@@ -47,16 +49,18 @@ if ($current_symbol->id == 0) {
 
 $symbol_to_display = $current_symbol->reference;
 
-list($data_sma,$data_ema,$data_macd) = load_last_data_for_symbol($db, $current_symbol);
+list($data_sma, $data_ema, $data_macd1, $data_macd2, $data_macd3) = load_last_data_for_symbol($db, $current_symbol);
 
 function load_last_data_for_symbol($db, $current_symbol){
   $data = get_stock_value_for_symbol($db, $current_symbol);
 
   $data_sma = format_data_sma($data);
   $data_ema = format_data_ema($data);
-  $data_macd = format_data_macd($data);
+  $data_macd1 = format_data_macd1($data);
+  $data_macd2 = format_data_macd2($data);
+  $data_macd3 = format_data_macd3($data);
 
-  return array($data_sma,$data_ema,$data_macd);
+  return array($data_sma, $data_ema, $data_macd1, $data_macd2, $data_macd3);
 }
 
 function format_data_sma($data) {
@@ -83,13 +87,37 @@ function format_data_ema($data) {
   return json_encode($table);
 }
 
-function format_data_macd($data) {
+function format_data_macd1($data) {
   $table = array();
 
-  $table[]= array('Time', 'last_bid', 'macd_value', 'macd_trigger', 'signal');
+  $table[]= array('Time', 'last_bid', 'signal');
 
   foreach($data as $row) {
-    $table[]= array($row->bid_at, $row->last_bid, $row->macd_value, $row->macd_trigger, $row->macd_signal);
+    $table[]= array($row->bid_at, $row->last_bid, $row->macd_signal);
+  }
+
+  return json_encode($table);
+}
+
+function format_data_macd2($data) {
+  $table = array();
+
+  $table[]= array('Time', 'macd_value', 'macd_trigger', 'signal');
+
+  foreach($data as $row) {
+    $table[]= array($row->bid_at, $row->macd_value, $row->macd_trigger, $row->macd_signal);
+  }
+
+  return json_encode($table);
+}
+
+function format_data_macd3($data) {
+  $table = array();
+
+  $table[]= array('Time', 'last_bid', 'signal', 'High stagnation limit', 'Low stagnation limit');
+
+  foreach($data as $row) {
+    $table[]= array($row->bid_at, $row->last_bid, $row->macd_signal, $row->macd_absol_trigger_signal, -$row->macd_absol_trigger_signal);
   }
 
   return json_encode($table);
