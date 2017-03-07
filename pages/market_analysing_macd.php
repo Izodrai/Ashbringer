@@ -6,6 +6,9 @@ include '../controllers/market_analyse.php';
  ?>
 <html>
    <head>
+
+
+
      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
      <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -16,9 +19,39 @@ include '../controllers/market_analyse.php';
         var data_macd2 = new google.visualization.arrayToDataTable(<?=$data_macd2?>);
         var data_macd3 = new google.visualization.arrayToDataTable(<?=$data_macd3?>);
 
+
         var options_macd1 = {
           title: 'MACD evolution for <?=$symbol_to_display?> (charts_1)',
           seriesType: 'line',
+
+          width: window.innerWidth,
+          height: window.innerHeight-200,
+
+          vAxes: {
+            0: {title: 'Bid Value'},
+            1: {title: 'Signal'}
+          },
+
+          hAxis: {title: 'Time'},
+
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1, type: 'bars'},
+            2: {targetAxisIndex: 1},
+            3: {targetAxisIndex: 1}
+          },
+          crosshair: {
+            color: '#000',
+            trigger: 'selection'
+          }
+        };
+
+        var options_macd2 = {
+          title: 'MACD evolution for <?=$symbol_to_display?> (charts_2)',
+          seriesType: 'line',
+
+          width: window.innerWidth,
+          height: window.innerHeight-200,
 
           vAxes: {
             0: {title: 'Bid Value'},
@@ -36,9 +69,12 @@ include '../controllers/market_analyse.php';
             trigger: 'selection'
           }
         };
-        var options_macd2 = {
-          title: 'MACD evolution for <?=$symbol_to_display?> (charts_2)',
+        var options_macd3 = {
+          title: 'MACD evolution for <?=$symbol_to_display?> (charts_3)',
           seriesType: 'line',
+
+          width: window.innerWidth,
+          height: window.innerHeight-200,
 
           vAxes: {
             0: {title: 'Macd Value'},
@@ -51,28 +87,6 @@ include '../controllers/market_analyse.php';
             0: {targetAxisIndex: 0},
             1: {targetAxisIndex: 0},
             2: {targetAxisIndex: 1, type: 'bars'}
-          },
-          crosshair: {
-            color: '#000',
-            trigger: 'selection'
-          }
-        };
-        var options_macd3 = {
-          title: 'MACD evolution for <?=$symbol_to_display?> (charts_3)',
-          seriesType: 'line',
-
-          vAxes: {
-            0: {title: 'Bid Value'},
-            1: {title: 'Signal'}
-          },
-
-          hAxis: {title: 'Time'},
-
-          series: {
-            0: {targetAxisIndex: 0},
-            1: {targetAxisIndex: 1, type: 'bars'},
-            2: {targetAxisIndex: 1},
-            3: {targetAxisIndex: 1}
           },
           crosshair: {
             color: '#000',
@@ -112,8 +126,8 @@ include '../controllers/market_analyse.php';
         <input type="submit" value="Select it"/>
       </form>
     </p>
-   <div id="charts_macd1" style="width: 1200px; height: 800px"></div>
-   <div id="charts_macd2" style="width: 1200px; height: 800px"></div>
-   <div id="charts_macd3" style="width: 1200px; height: 800px"></div>
+   <div id="charts_macd1"></div>
+   <div id="charts_macd2"></div>
+   <div id="charts_macd3"></div>
   </body>
 </html>

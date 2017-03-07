@@ -18,6 +18,9 @@ include '../controllers/market_analyse.php';
           title: 'SMA evolution for <?=$symbol_to_display?>',
           seriesType: 'line',
 
+          width: window.innerWidth,
+          height: window.innerHeight-200,
+
           vAxes: {
             0: {title: 'Bid Value'},
             1: {title: 'Diff Value'}
@@ -64,6 +67,6 @@ include '../controllers/market_analyse.php';
         <input type="submit" value="Select it"/>
       </form>
     </p>
-   <div id="charts_sma" style="width: 1200px; height: 800px"></div>
+   <div id="charts_sma"></div>
   </body>
 </html>

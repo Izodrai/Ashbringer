@@ -8,7 +8,7 @@ include '../models/stock_values.php';
 $config = load_config();
 
 try {
-  $db = db_connect($config->database_server);
+  $db = db_connect($config->localhost_server);
 } catch(PDOException $ex) {
   echo $ex->getMessage();
   exit(1);
@@ -87,7 +87,7 @@ function format_data_ema($data) {
   return json_encode($table);
 }
 
-function format_data_macd1($data) {
+function format_data_macd2($data) {
   $table = array();
 
   $table[]= array('Time', 'last_bid', 'signal');
@@ -99,7 +99,7 @@ function format_data_macd1($data) {
   return json_encode($table);
 }
 
-function format_data_macd2($data) {
+function format_data_macd3($data) {
   $table = array();
 
   $table[]= array('Time', 'macd_value', 'macd_trigger', 'signal');
@@ -111,7 +111,7 @@ function format_data_macd2($data) {
   return json_encode($table);
 }
 
-function format_data_macd3($data) {
+function format_data_macd1($data) {
   $table = array();
 
   $table[]= array('Time', 'last_bid', 'signal', 'High stagnation limit', 'Low stagnation limit');
