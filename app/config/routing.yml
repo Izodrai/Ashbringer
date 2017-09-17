@@ -1,3 +1,11 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+user:
+    resource: '@UserBundle/Controller/'
+    type: annotation
+
+hello_the_world:
+    resource: '@AppBundle/Controller/'
+    type: annotation

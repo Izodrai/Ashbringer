@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <ul>
+        {% for ev in events %}
+            <li>{{ ev.id }}</li>
+            <li>{{ ev.reference }}</li>
+            <li>{{ ev.from|date('d/m/Y') }}</li>
+            <li>{{ ev.to|date('d/m/Y') }}</li>
+            <li>by</li>
+            <li>
+                <ul>
+                    <li>
+                        {{ ev.promoter.id }}
+                    </li>
+                    <li>
+                        {{ ev.promoter.firstname }}
+                    </li>
+                    <li>
+                        {{ ev.promoter.age }}
+                    </li>
+                    <li>
+                        {{ ev.promoter.solde }}
+                    </li>
+                </ul>
+            </li>
+            <br>
+        {% endfor %}
+    </ul>
+{% endblock %}
